@@ -4,10 +4,10 @@ This repository provides a set of **Anthropic Agent Skills**–compliant extensi
 
 ## 📂 Repository Structure
 
-Each skill lives under `.github/skills/` as a self-contained unit so that AI agents can discover and run them automatically.
+Each skill lives under `skills/` at the repository root as a self-contained unit so that AI agents can discover and run them automatically. This layout avoids conflicting with an existing `.github` directory when you add these skills to another project.
 
 ```text
-.github/skills/
+skills/
 ├── issue-architect/       # Issue creation and task design
 ├── gitflow-manager/       # Branch management, releases, and tagging
 ├── pr-author-pro/         # Auto-generated PR descriptions (with A11y/Security audit)
@@ -20,17 +20,40 @@ Each skill lives under `.github/skills/` as a self-contained unit so that AI age
 
 ## 🚀 Getting Started
 
-### 1. Installation
+### 1. Use right after clone
 
-Clone this repository or create a symbolic link from your project to use the skills.
+Clone this repo and open it in your AI agent (Cursor, Claude Code, etc.). Skills under `skills/` are ready to use with no extra setup.
 
 ```bash
-# Run from your project root
-ln -s /path/to/my-agent-skills/.github/skills .github/skills
-
+git clone https://github.com/YOUR_ORG/my-agent-skills.git
+cd my-agent-skills
+# Open this folder in Cursor (or your agent); the agent will discover skills in skills/
 ```
 
-### 2. Prerequisites
+Ask the agent to use a skill by name (e.g. “Use the Issue Architect skill to create an issue for …”) or refer to the [Skills Guide](#-skills-guide) below.
+
+### 2. Use from another project
+
+Link this repo’s `skills` into your project so your agent can see them.
+
+**Option A — Put skills in `.github/skills` (if your tooling expects that path):**
+
+```bash
+# From your project root (create .github if it doesn’t exist)
+mkdir -p .github
+ln -s /path/to/my-agent-skills/skills .github/skills
+```
+
+**Option B — Put skills at the project root as `skills`:**
+
+```bash
+# From your project root
+ln -s /path/to/my-agent-skills/skills skills
+```
+
+Then open that project in your agent; it will use the linked skills in that workspace.
+
+### 3. Prerequisites
 
 These skills rely on the following tools:
 

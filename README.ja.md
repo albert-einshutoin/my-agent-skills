@@ -4,10 +4,10 @@
 
 ## 📂 Repository Structure
 
-各スキルは `.github/skills/` 配下に独立して配置されており、AIエージェントが自動的に認識・実行できるように設計されています。
+各スキルはリポジトリルートの `skills/` 配下に独立して配置されており、AIエージェントが自動的に認識・実行できるように設計されています。既存プロジェクトの `.github` と衝突しない構成です。
 
 ```text
-.github/skills/
+skills/
 ├── issue-architect/       # Issue作成とタスク設計
 ├── gitflow-manager/       # ブランチ管理・リリース・タグ打ち
 ├── pr-author-pro/         # PR説明文の自動生成（A11y/Security監査付）
@@ -20,17 +20,40 @@
 
 ## 🚀 Getting Started
 
-### 1. インストール
+### 1. クローンしてすぐ使う
 
-このリポジトリをクローンするか、既存のプロジェクトにシンボリックリンクを貼ります。
+リポジトリをクローンし、AIエージェント（Cursor や Claude Code など）でこのフォルダを開けば、`skills/` 配下のスキルは追加設定なしで利用できます。
 
 ```bash
-# プロジェクトのルートディレクトリで実行
-ln -s /path/to/my-agent-skills/.github/skills .github/skills
-
+git clone https://github.com/YOUR_ORG/my-agent-skills.git
+cd my-agent-skills
+# このフォルダを Cursor 等で開く。エージェントが skills/ 内のスキルを認識します
 ```
 
-### 2. 必要条件
+エージェントにスキル名を指定して使わせる（例：「Issue Architect スキルで … の Issue を作成して」）か、下記の [Skills Guide](#-skills-guide) を参照してください。
+
+### 2. 他のプロジェクトから使う
+
+利用したいプロジェクトのルートから、このリポジトリの `skills` をシンボリックリンクで参照します。
+
+**A. 自分のプロジェクトで `.github/skills` に置きたい場合（ツールがこのパスを参照する場合）：**
+
+```bash
+# プロジェクトのルートで実行（.github が無ければ作成）
+mkdir -p .github
+ln -s /path/to/my-agent-skills/skills .github/skills
+```
+
+**B. プロジェクトルートに `skills` として置く場合：**
+
+```bash
+# プロジェクトのルートで実行
+ln -s /path/to/my-agent-skills/skills skills
+```
+
+そのプロジェクトをエージェントで開くと、リンクしたスキルがワークスペース内で利用されます。
+
+### 3. 必要条件
 
 これらのスキルは以下のツールを活用します。
 
